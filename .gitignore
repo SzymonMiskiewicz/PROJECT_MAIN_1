@@ -1,0 +1,5 @@
+# For InteliJ IDEA
+
+.idea/*
+out/*
+*.iml
