@@ -1,8 +1,6 @@
 package my.first.main.project;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,27 +8,37 @@ import java.util.Scanner;
 
 public class Countries {
 
-    public static final String TAB = "/t";
-    public static List<Country> listOfCountries = new ArrayList<>();
+    public static final String TAB = "\t";
+    private List<Country> listOfCountries = new ArrayList<>();
 
    public void addCountry(Country newCountry){
        listOfCountries.add(newCountry);
    }
+    public int countriesSize (){
+        return listOfCountries.size();
+    }
 
-    public void importFromFile(String vatFile) throws TaxException{
-        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(vatFile)))) {
+    public void importFromFile(String fileName) throws TaxException {
+        try (Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(fileName)))) {
             int lineNumber = 0;
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 String record = scanner.nextLine();
                 lineNumber++;
+                System.out.println(record);
                 try {
-                    this.addCountry(Country.parse(record),TAB);
+                    this.addCountry(Country.parse(record, TAB));
                 } catch (ParseException e) {
-                    ""+e.printStackTrace();
+                    throw new TaxException(
+                            "Invalid input file: " + fileName + " line number: " + lineNumber + e.getMessage());
                 }
             }
-        } catch (FileNotFoundException e){
-            throw new TaxException("Input file :"+vatFile+"was not found. "+e.getMessage());
+        } catch (FileNotFoundException e) {
+            throw new TaxException("Input file :" + fileName + " was not found. " + e.getMessage());
         }
+
     }
+
+
+
+
 }
