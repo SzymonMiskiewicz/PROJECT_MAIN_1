@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //import
+        // region import
        Countries country = new Countries();
 
 
@@ -20,7 +20,9 @@ public class Main {
         }
         // end region
 
-        System.out.println(country.getBasicInfo());
+        for (int i = 0; i <country.countriesSize() ; i++) {
+            System.out.println(country.getCountry(i).getDescription());
+        }
     }
 
 }

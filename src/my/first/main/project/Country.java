@@ -1,26 +1,25 @@
 package my.first.main.project;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class Country {
 
+    public static final String NR = "\n";
     private String countryCode;
     private String nameOfCountry;
-    private double fullTaxInPercent;
-    private double decreaseTaxInPercent;
+    private int fullTaxInPercent;
+    private int decreaseTaxInPercent;
     private boolean extraTax;
+    private List<Countries> countriesList = new ArrayList<>();
 
 
 
-    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
-                   double decreaseTaxPercent, boolean extraTax) {
+
+    public Country(String nameOfCountry, String countryCodes, int fullTaxPercent,
+                   int decreaseTaxPercent, boolean extraTax) {
         this.nameOfCountry = nameOfCountry;
         this.countryCode = countryCodes;
         this.fullTaxInPercent = fullTaxPercent;
@@ -28,33 +27,23 @@ public class Country {
         this.extraTax = extraTax;
     }
 
-    public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxPercentStr,
-                   String decreaseTaxPercentStr, String extraTaxStr) throws TaxException {
-        this.nameOfCountry = nameOfCountryStr;
-        this.countryCode = countryCodesStr;
-        try {
-            this.fullTaxInPercent = Double.parseDouble(fullTaxPercentStr);
-            this.decreaseTaxInPercent = Double.parseDouble(decreaseTaxPercentStr);
-        } catch (NumberFormatException e) {
-            throw new TaxException("Bad format of tax: " + e.getMessage());
-        }
-        this.extraTax = Boolean.parseBoolean(extraTaxStr);
-    }
 
-    public static Country parse(String inputLine, String delimiter) throws ParseException, TaxException {
+
+    public static Country parse(String inputLine, String delimiter) throws ParseException {
         String[] items = inputLine.split(delimiter);
 
         int numberOfItems = items.length;
-        if (numberOfItems != 5) throw new ParseException("Number of items is not correct: " + numberOfItems
-                + "on the line: " + inputLine, 0);
+        if (numberOfItems != 5) throw new ParseException(" Number of items is not correct: "
+                + numberOfItems+ ","
+                + " on the line: " + inputLine, 0);
 
         String countryCode = items[0];
         String nameOfCountry = items[1];
-        double fullTaxInPercent = Double.parseDouble(items[2]);
-        double decreaseTaxInPercent = Double.parseDouble(items[3]);
+        int fullTaxInPercent = Integer.parseInt(items[2]);
+        int decreaseTaxInPercent = Integer.parseInt(items[3]);
         boolean extraTax = Boolean.parseBoolean(items[4]);
 
-        return new Country(countryCode, nameOfCountry.toUpperCase(Locale.ROOT),
+        return new Country(countryCode,nameOfCountry.toUpperCase(Locale.ROOT),
                 fullTaxInPercent, decreaseTaxInPercent, extraTax);
     }
 
@@ -72,18 +61,7 @@ public class Country {
         return countryCode;
     }
 
-    //    public String getCountryCodes (String nameOfCountry){
-//        String[] isoCountryCodes = Locale.getISOCountries();
-//        for (String code : isoCountryCodes) {
-//            Locale locale = new Locale("", code);
-//            if (code.equalsIgnoreCase(locale.getDisplayCountry())) {
-//                return code;
-//            }
-//        }
-//
-//        return countryCode;
-//
-//    }
+
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
@@ -92,7 +70,7 @@ public class Country {
         return fullTaxInPercent;
     }
 
-    public void setFullTaxInPercent(double fullTaxInPercent) {
+    public void setFullTaxInPercent(int fullTaxInPercent) {
         this.fullTaxInPercent = fullTaxInPercent;
     }
 
@@ -100,7 +78,7 @@ public class Country {
         return decreaseTaxInPercent;
     }
 
-    public void setDecreaseTaxInPercent(double decreaseTaxInPercent) {
+    public void setDecreaseTaxInPercent(int decreaseTaxInPercent) {
         this.decreaseTaxInPercent = decreaseTaxInPercent;
     }
 
@@ -118,8 +96,12 @@ public class Country {
 
 
     public String getDescription() {
-        return ("Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getExtraTax());
+        StringBuilder info = new StringBuilder(
+                "Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getExtraTax());
 
+
+
+        return info.toString();
     }
 
  

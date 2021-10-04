@@ -2,18 +2,20 @@ package my.first.main.project;
 
 import java.io.*;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Countries {
 
     private List<Country> listOfCountries = new ArrayList<>();
+    private final String DELIMITER_FOR_FILE = "\n";
 
-    public void add(Country country){
+    public void addCountry(Country country){
         listOfCountries.add(country);
+    }
+    public Country getCountry(int index){
+        return listOfCountries.get(index);
     }
 
     public int countriesSize (){
@@ -25,16 +27,21 @@ public class Countries {
             while (scanner.hasNextLine()) {
                 String record = scanner.nextLine();
                 lineNumber++;
-
+                try {
+                    this.addCountry(Country.parse(record, DELIMITER_FOR_FILE));
+                } catch (ParseException e) {
+                   throw new TaxException(
+                           "Invalid input file: "+fileName+ " line number: " + lineNumber+ "," +e.getMessage());
+                }
 //                System.out.println(record);
             }
         } catch (FileNotFoundException e) {
-            throw new TaxException("Input file :" + fileName + " was not found. " + e.getMessage());
+            throw new TaxException("Input file : " + fileName + " was not found. " + e.getMessage());
         }
 
     }
     public String getBasicInfo(){
-        StringBuilder info = new StringBuilder("Number of Countries: "+listOfCountries.size());
+        StringBuilder info = new StringBuilder();
         for (Country country:listOfCountries) {
             info.append(country.getNameOfCountry())
                     .append(country.getCountryCode())
@@ -45,17 +52,6 @@ public class Countries {
         }
         return info.toString();
     }
-    public static String formatCountryList(List<Country> list) {
-        StringBuilder builder = new StringBuilder(
-                "Number of Countries (" + list.size() + " items):" + System.lineSeparator());
-        list.stream().forEach(
-                country -> {
-                    builder.append(" * " + country);
-                    builder.append(System.lineSeparator());
-                });
-        return builder.toString();
-
-
-    }
+    
 
 }
