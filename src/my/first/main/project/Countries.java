@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Countries {
 
     private List<Country> listOfCountries = new ArrayList<>();
-    private final String DELIMITER_FOR_FILE = "\n";
+    private final String DELIMITER_FOR_FILE = "\t";
 
     public void addCountry(Country country){
         listOfCountries.add(country);
@@ -22,18 +22,18 @@ public class Countries {
         return listOfCountries.size();
     }
     public void importFromFile(String fileName) throws TaxException {
-        try (Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(fileName)))) {
+        try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
             int lineNumber = 0;
             while (scanner.hasNextLine()) {
-                String record = scanner.nextLine();
+                String inputLine = scanner.nextLine();
                 lineNumber++;
                 try {
-                    this.addCountry(Country.parse(record, DELIMITER_FOR_FILE));
+                    addCountry(Country.parse(inputLine, DELIMITER_FOR_FILE));
                 } catch (ParseException e) {
                    throw new TaxException(
                            "Invalid input file: "+fileName+ " line number: " + lineNumber+ "," +e.getMessage());
                 }
-//                System.out.println(record);
+//                System.out.println(inputLine);
             }
         } catch (FileNotFoundException e) {
             throw new TaxException("Input file : " + fileName + " was not found. " + e.getMessage());
@@ -52,6 +52,6 @@ public class Countries {
         }
         return info.toString();
     }
-    
+
 
 }

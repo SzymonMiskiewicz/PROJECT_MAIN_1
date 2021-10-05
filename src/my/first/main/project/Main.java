@@ -13,6 +13,7 @@ public class Main {
        Countries country = new Countries();
 
 
+
         try{
         country.importFromFile(INPUTFILE);
     } catch (TaxException e) {

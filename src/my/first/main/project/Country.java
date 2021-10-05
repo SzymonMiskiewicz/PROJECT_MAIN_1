@@ -7,19 +7,19 @@ import java.util.Locale;
 
 public class Country {
 
-    public static final String NR = "\n";
+
     private String countryCode;
     private String nameOfCountry;
-    private int fullTaxInPercent;
-    private int decreaseTaxInPercent;
+    private double fullTaxInPercent;
+    private double decreaseTaxInPercent;
     private boolean extraTax;
     private List<Countries> countriesList = new ArrayList<>();
 
 
 
 
-    public Country(String nameOfCountry, String countryCodes, int fullTaxPercent,
-                   int decreaseTaxPercent, boolean extraTax) {
+    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
+                   double decreaseTaxPercent, boolean extraTax) {
         this.nameOfCountry = nameOfCountry;
         this.countryCode = countryCodes;
         this.fullTaxInPercent = fullTaxPercent;
@@ -37,13 +37,13 @@ public class Country {
                 + numberOfItems+ ","
                 + " on the line: " + inputLine, 0);
 
-        String countryCode = items[0];
-        String nameOfCountry = items[1];
-        int fullTaxInPercent = Integer.parseInt(items[2]);
-        int decreaseTaxInPercent = Integer.parseInt(items[3]);
+        String nameOfCountry = items[0];
+        String countryCode = items[1];
+        double fullTaxInPercent = Double.parseDouble(items[2]);
+        double decreaseTaxInPercent = Double.parseDouble(items[3]);
         boolean extraTax = Boolean.parseBoolean(items[4]);
 
-        return new Country(countryCode,nameOfCountry.toUpperCase(Locale.ROOT),
+        return new Country(countryCode,nameOfCountry,
                 fullTaxInPercent, decreaseTaxInPercent, extraTax);
     }
 
@@ -97,7 +97,7 @@ public class Country {
 
     public String getDescription() {
         StringBuilder info = new StringBuilder(
-                "Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getExtraTax());
+                "Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getDecreaseTaxInPercent());
 
 
 
