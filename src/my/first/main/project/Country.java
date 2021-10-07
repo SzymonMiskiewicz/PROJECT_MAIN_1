@@ -95,14 +95,17 @@ public class Country {
 
 
 
+
+
+
+
+
+
     public String getDescription() {
         StringBuilder info = new StringBuilder(
                 "Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getDecreaseTaxInPercent());
-
-
-
         return info.toString();
     }
 
- 
+
 }

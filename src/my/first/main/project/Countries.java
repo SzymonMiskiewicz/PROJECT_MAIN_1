@@ -24,14 +24,15 @@ public class Countries {
     public void importFromFile(String fileName) throws TaxException {
         try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
             int lineNumber = 0;
-            while (scanner.hasNextLine()) {
+            while (scanner.hasNextLine()&&scanner.hasNextDouble()) {
                 String inputLine = scanner.nextLine();
                 lineNumber++;
+
                 try {
                     addCountry(Country.parse(inputLine, DELIMITER_FOR_FILE));
                 } catch (ParseException e) {
-                   throw new TaxException(
-                           "Invalid input file: "+fileName+ " line number: " + lineNumber+ "," +e.getMessage());
+                    throw new TaxException(
+                            "Invalid input file: "+fileName+ " line number: " + lineNumber+ "," +e.getMessage());
                 }
 //                System.out.println(inputLine);
             }
