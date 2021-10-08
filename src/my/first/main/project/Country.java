@@ -29,25 +29,6 @@ public class Country {
 
 
 
-    public static Country parse(String inputLine, String delimiter) throws ParseException {
-        String[] items = inputLine.split(delimiter);
-
-        int numberOfItems = items.length;
-        if (numberOfItems != 5) throw new ParseException(" Number of items is not correct: "
-                + numberOfItems+ ","
-                + " on the line: " + inputLine, 0);
-
-        String nameOfCountry = items[0];
-        String countryCode = items[1];
-        double fullTaxInPercent = Double.parseDouble(items[2]);
-        double decreaseTaxInPercent = Double.parseDouble(items[3]);
-        boolean extraTax = Boolean.parseBoolean(items[4]);
-
-        return new Country(countryCode,nameOfCountry,
-                fullTaxInPercent, decreaseTaxInPercent, extraTax);
-    }
-
-
     public String getNameOfCountry() {
         return nameOfCountry;
     }
@@ -91,20 +72,10 @@ public class Country {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public String getDescription() {
-        StringBuilder info = new StringBuilder(
-                "Name of Country: " + getNameOfCountry()+ "(" +getCountryCode()+")"+ "Tax: "+getDecreaseTaxInPercent());
-        return info.toString();
+        String info = ("Name of Country: " + getNameOfCountry()
+                        + "(" +getCountryCode()+")"+ "Tax: "+getDecreaseTaxInPercent())+" %";
+        return info;
     }
 
 
