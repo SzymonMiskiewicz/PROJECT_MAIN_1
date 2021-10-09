@@ -13,9 +13,6 @@ public class Country {
     private double fullTaxInPercent;
     private double decreaseTaxInPercent;
     private boolean extraTax;
-    private List<Countries> countriesList = new ArrayList<>();
-
-
 
 
 //    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
@@ -79,11 +76,14 @@ public class Country {
         this.extraTax = extraTax;
     }
 
-
     public String getDescription() {
-        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getDecreaseTaxInPercent())+" %";
+        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getFullTaxInPercent())+" %";
         return info;
     }
 
-
+    public String toString(){
+            if (fullTaxInPercent>20&&extraTax==false);
+        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getFullTaxInPercent())+" %";
+        return info;
+    }
 }

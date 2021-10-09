@@ -1,7 +1,6 @@
 package my.first.main.project;
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.*;
 
 public class Countries {
@@ -20,6 +19,8 @@ public class Countries {
     public int countriesSize (){
         return listOfCountries.size();
     }
+
+
 
 //    public void importFromFile(String fileName) throws TaxException {
 //        try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {

@@ -7,6 +7,7 @@ import java.util.List;
 public class Main {
 
     public static final String INPUTFILE = "vat-eu.csv";
+    public static final String GAP = "=================================================\n";
 
     public static void main(String[] args) {
 
@@ -23,17 +24,20 @@ public class Main {
         for (int i = 0; i <country.countriesSize() ; i++) {
             System.out.println(country.getCountry(i).getDescription());
         }
-        List<Country>countryList = new ArrayList<>();{
-        for (Country cntr : countryList ) {
-            if (cntr.getFullTaxInPercent()>20 && cntr.getExtraTax()==false){
-                System.out.println(cntr.getDescription());
 
-            }
+        System.out.println(GAP);
+
+        for (int i = 0; i <country.countriesSize() ; i++) {
+            System.out.println(country.getCountry(i));
         }
-    }
+
+
 
 
     }
+
+
+
 
 }
 
