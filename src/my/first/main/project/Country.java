@@ -1,9 +1,9 @@
 package my.first.main.project;
 
-import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 public class Country {
 
@@ -18,13 +18,21 @@ public class Country {
 
 
 
-    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
-                   double decreaseTaxPercent, boolean extraTax) {
-        this.nameOfCountry = nameOfCountry;
-        this.countryCode = countryCodes;
-        this.fullTaxInPercent = fullTaxPercent;
-        this.decreaseTaxInPercent = decreaseTaxPercent;
-        this.extraTax = extraTax;
+//    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
+//                   double decreaseTaxPercent, boolean extraTax) {
+//        this.nameOfCountry = nameOfCountry;
+//        this.countryCode = countryCodes;
+//        this.fullTaxInPercent = fullTaxPercent;
+//        this.decreaseTaxInPercent = decreaseTaxPercent;
+//        this.extraTax = extraTax;
+
+        public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxPercentStr,
+                   String decreaseTaxPercentStr, String extraTaxStr) {
+        this.nameOfCountry = nameOfCountryStr;
+        this.countryCode = countryCodesStr;
+        this.fullTaxInPercent = Double.parseDouble(fullTaxPercentStr);
+        this.decreaseTaxInPercent = Double.parseDouble(decreaseTaxPercentStr);
+        this.extraTax = Boolean.parseBoolean(extraTaxStr);
     }
 
 
@@ -73,8 +81,7 @@ public class Country {
 
 
     public String getDescription() {
-        String info = ("Name of Country: " + getNameOfCountry()
-                        + "(" +getCountryCode()+")"+ "Tax: "+getDecreaseTaxInPercent())+" %";
+        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getDecreaseTaxInPercent())+" %";
         return info;
     }
 

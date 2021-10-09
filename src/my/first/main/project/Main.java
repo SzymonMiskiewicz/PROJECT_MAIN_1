@@ -14,7 +14,7 @@ public class Main {
        Countries country = new Countries();
 
         try{
-        country.importFromFile(INPUTFILE);
+        country = Countries.importFromFile(INPUTFILE);
     } catch (TaxException e) {
             System.err.println(e.getMessage());
         }
@@ -23,14 +23,15 @@ public class Main {
         for (int i = 0; i <country.countriesSize() ; i++) {
             System.out.println(country.getCountry(i).getDescription());
         }
-        List<Country>countriesList = new ArrayList<>();{
-        for (Country cntr : countriesList ) {
+        List<Country>countryList = new ArrayList<>();{
+        for (Country cntr : countryList ) {
             if (cntr.getFullTaxInPercent()>20 && cntr.getExtraTax()==false){
                 System.out.println(cntr.getDescription());
 
             }
         }
     }
+
 
     }
 

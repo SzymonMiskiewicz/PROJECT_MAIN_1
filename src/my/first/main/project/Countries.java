@@ -2,10 +2,7 @@ package my.first.main.project;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Countries {
 
@@ -24,33 +21,40 @@ public class Countries {
         return listOfCountries.size();
     }
 
-    public void importFromFile(String fileName) throws TaxException {
+//    public void importFromFile(String fileName) throws TaxException {
+//        try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
+//            while (scanner.hasNextLine() ) {
+//                String inputLine = scanner.nextLine();
+//                scanner.useDelimiter(DELIMITER_FOR_FILE);
+//                String countryCode = scanner.next();
+//                String countryName = scanner.next();
+//                Double countryFullTax = scanner.nextDouble();
+//                Double countryDecreaseTax = scanner.nextDouble();
+//                Boolean countryExtraTax = scanner.nextBoolean();
+//                addCountry(new Country(countryCode, countryName, countryFullTax, countryDecreaseTax, countryExtraTax));
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            throw new TaxException("Input file : " + fileName + " was not found. " + e.getMessage());
+//        }
+//
+//    }
+    public static Countries importFromFile(String fileName) throws TaxException {
+        Countries countries = new Countries();
         try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
-            int lineNumber = 0;
-            scanner.useLocale(Locale.GERMANY);
-            while (scanner.hasNextLine() ) {
+            while (scanner.hasNextLine()){
                 String inputLine = scanner.nextLine();
-                String c1 = scanner.next();
-                String c2 = scanner.next();
-                Double c3 = scanner.nextDouble();
-                Double c4 = scanner.nextDouble();
-                Boolean c5 = scanner.nextBoolean();
-                this.addCountry(new Country(c1, c2, c3, c4, c5));
-                lineNumber++;
-
-                //try {
-                    //addCountry(Country.parse(inputLine, DELIMITER_FOR_FILE));
-                //} catch (ParseException e) {
-                    //e.printStackTrace();
-//                    throw new TaxException(
-//                            "Invalid input file: "+fileName+ " line number: " + lineNumber+ "," +e.getMessage());
-                //}
+                String[] items = inputLine.split(countries.DELIMITER_FOR_FILE);
+                if (items.length!=5) throw new TaxException(
+                        "The number of items does not correct on: "+inputLine+(items.length+"items"));
+                Country country = new Country(items[1],items[0],items[2],items[3],items[4]);
+                countries.addCountry(country);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            throw new TaxException("Input file : " + fileName + " was not found. " + e.getMessage());
         }
-
+        catch (FileNotFoundException ex) {
+            throw new TaxException("File: " + fileName + "Not Found" + ex.getMessage());
+        }
+        return countries;
     }
 
 
