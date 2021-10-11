@@ -57,6 +57,43 @@ public class Countries {
         }
         return countries;
     }
+    public void exportToFile (String fileName) throws TaxException{
+        try (PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))){
+            for( Country country:listOfCountries){
+                writer.println(country.getCountryCode()+DELIMITER_FOR_FILE
+                        +country.getNameOfCountry()+DELIMITER_FOR_FILE+
+                        country.getFullTaxInPercent()+DELIMITER_FOR_FILE+
+                        country.getDecreaseTaxInPercent()+DELIMITER_FOR_FILE+
+                        country.getExtraTax());
+            }
+        }catch (FileNotFoundException exa){
+            throw new TaxException("File: "+ fileName+"is not found"+exa.getMessage());
+        }
+
+    }
+    public List<Country>getCountriesWithBiggerAndSpecialTax(){
+        List<Country> result = new ArrayList<>();
+        for (Country country:listOfCountries) {
+
+            if (country.getFullTaxInPercent()>20
+                            &&
+                    country.getExtraTax()==false) {
+
+                result.add(country);
+            }
+        }
+        return result;
+    }
+    public static String formatCountryList(List<Country> list) {
+        StringBuilder builder = new StringBuilder(
+                "List of Countries: (" + list.size() + " items):" + System.lineSeparator());
+        list.stream().forEach(
+                country -> {
+                    builder.append(" * " + country);
+                    builder.append(System.lineSeparator());
+                });
+        return builder.toString();
+    }
 
 
 

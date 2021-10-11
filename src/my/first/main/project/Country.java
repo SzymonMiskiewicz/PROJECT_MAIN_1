@@ -76,14 +76,18 @@ public class Country {
         this.extraTax = extraTax;
     }
 
+
+
     public String getDescription() {
-        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getFullTaxInPercent())+" %";
+        String info = ("Name of Country: " + nameOfCountry
+                + " (" +countryCode+") "+ "Tax: "+fullTaxInPercent
+                +" %"+" Extra Tax: "+extraTax);
         return info;
     }
 
     public String toString(){
-            if (fullTaxInPercent>20&&extraTax==false);
-        String info = ("Name of Country: " + getNameOfCountry() + " (" +getCountryCode()+") "+ "Tax: "+getFullTaxInPercent())+" %";
+        String info = ("Name of Country: " + nameOfCountry + " (" +countryCode+") "
+                + "Tax: "+fullTaxInPercent)+" %"+"Extra Tax: " +extraTax ;
         return info;
     }
 }
