@@ -28,7 +28,7 @@ public class Main {
         } catch (TaxException e) {
             System.err.println(e.getMessage());
         }
-        
+
         //1.Vypiš seznam všech států
         for (int i = 0; i < country.countriesSize(); i++) {
             System.out.println(country.getCountry(i).getDescription());
