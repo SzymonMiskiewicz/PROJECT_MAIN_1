@@ -1,11 +1,9 @@
 package my.first.main.project;
 
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Country {
+public class Country  {
 
 
     private String countryCode;
@@ -30,6 +28,10 @@ public class Country {
         this.fullTaxInPercent = Double.parseDouble(fullTaxPercentStr);
         this.decreaseTaxInPercent = Double.parseDouble(decreaseTaxPercentStr);
         this.extraTax = Boolean.parseBoolean(extraTaxStr);
+    }
+    public Country(String nameOfCountry, int fullTaxInPercent) {
+        this.nameOfCountry = nameOfCountry;
+            this.fullTaxInPercent = fullTaxInPercent;
     }
 
 
@@ -56,7 +58,9 @@ public class Country {
         return fullTaxInPercent;
     }
 
-    public void setFullTaxInPercent(int fullTaxInPercent) {
+    public void setFullTaxInPercent(int fullTaxInPercent) throws TaxException {
+
+            if (fullTaxInPercent==0) {throw new TaxException("You wrote wrong value of tax" + fullTaxInPercent);}
         this.fullTaxInPercent = fullTaxInPercent;
     }
 
@@ -81,13 +85,15 @@ public class Country {
     public String getDescription() {
         String info = ("Name of Country: " + nameOfCountry
                 + " (" +countryCode+") "+ "Tax: "+fullTaxInPercent
-                +" %"+" Extra Tax: "+extraTax);
+                +" % "+" Extra Tax: "+extraTax);
         return info;
     }
 
     public String toString(){
         String info = ("Name of Country: " + nameOfCountry + " (" +countryCode+") "
-                + "Tax: "+fullTaxInPercent)+" %"+"Extra Tax: " +extraTax ;
+                + "Tax: "+fullTaxInPercent)+" % "+"Extra Tax: " +extraTax ;
         return info;
     }
+
+
 }
