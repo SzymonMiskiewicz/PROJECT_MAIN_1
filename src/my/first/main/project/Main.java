@@ -1,10 +1,5 @@
 package my.first.main.project;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Main {
 
     public static final String INPUTFILE = "vat-eu.csv";
@@ -14,10 +9,10 @@ public class Main {
     public static void main(String[] args) {
 
         // region import
-        Countries country = new Countries();
+        CountryController country = new CountryController();
 
         try {
-            country = Countries.importFromFile(INPUTFILE);
+            country = CountryController.importFromFile(INPUTFILE);
         } catch (TaxException e) {
             System.err.println(e.getMessage());
         }
@@ -41,13 +36,19 @@ public class Main {
          *  mají základní sazbu daně z přidané hodnoty vyšší než 20 %
          *  a přitom nepoužívají speciální sazbu daně.*/
 
-        System.out.print(Countries.formatCountryList(country.getCountriesWithBiggerAndNoSpecialTax()));
+        System.out.print(CountryController.formatCountryList(country.getCountriesWithBiggerAndNoSpecialTax()));
 
         System.out.println(GAP);
 
     /**4.Pod výpis doplň řádek s rovnítky pro oddělení a poté seznam zkratek států, které ve výpisu nefigurují.*/
-        System.out.print(Countries.differentFormatCountryList(country.getCountriesWithLowerAndSpecialTax()));
+        System.out.print(CountryController.differentFormatCountryList(country.getCountriesWithLowerAndSpecialTax()));
 
+        System.out.println(GAP);
+
+        /** Doplň možnost, aby uživatel z klávesnice zadal výši sazby DPH/VAT,
+         *  podle které se má filtrovat.
+         *  Vypíší se tedy státy se základní sazbou vyšší než ta, kterou uživatel zadal.*/
+        CountryController.getCountriesByTax();
 
 
     }
