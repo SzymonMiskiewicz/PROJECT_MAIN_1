@@ -142,21 +142,6 @@ public class CountryController implements Comparator<Country> {
         return result;
     }
 
-//    public static String anotherFormatCountryList(List<Country> list, int tax) {
-//        StringBuilder builder = new StringBuilder(
-//                "List of countries with higher or equal tax "
-//                        + tax +" % and extra tax: ("
-//                        + list.size() + " items):"
-//                        + System.lineSeparator());
-//        list.stream().forEach(
-//                country -> {
-//                    builder.append(" * " + country);
-//                    builder.append(System.lineSeparator());
-//                });
-//        return builder.toString();
-//    }
-
-
 }
 
 
