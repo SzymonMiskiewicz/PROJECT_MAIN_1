@@ -1,10 +1,6 @@
 package my.first.main.project;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Country  {
-
 
     private String countryCode;
     private String nameOfCountry;
@@ -12,14 +8,6 @@ public class Country  {
     private double decreaseTaxInPercent;
     private boolean extraTax;
 
-
-//    public Country(String nameOfCountry, String countryCodes, double fullTaxPercent,
-//                   double decreaseTaxPercent, boolean extraTax) {
-//        this.nameOfCountry = nameOfCountry;
-//        this.countryCode = countryCodes;
-//        this.fullTaxInPercent = fullTaxPercent;
-//        this.decreaseTaxInPercent = decreaseTaxPercent;
-//        this.extraTax = extraTax;
 
         public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxPercentStr,
                    String decreaseTaxPercentStr, String extraTaxStr) {
@@ -34,8 +22,6 @@ public class Country  {
             this.fullTaxInPercent = fullTaxInPercent;
     }
 
-
-
     public String getNameOfCountry() {
         return nameOfCountry;
     }
@@ -48,7 +34,6 @@ public class Country  {
     public String getCountryCode() {
         return countryCode;
     }
-
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
@@ -79,8 +64,6 @@ public class Country  {
     public void setExtraTax(boolean extraTax) {
         this.extraTax = extraTax;
     }
-
-
 
     public String getDescription() {
         String info = ("Name of Country: " + nameOfCountry

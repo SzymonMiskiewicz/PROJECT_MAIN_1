@@ -18,11 +18,13 @@ public class Main {
         }
         // end region
 
+        // region export
         try {
-            country.exportToFile(OUTPUTFILE);
+            country.exportToFileByTax(OUTPUTFILE);
         } catch (TaxException e) {
             System.err.println(e.getMessage());
         }
+        //end region
 
         //1.Vypiš seznam všech států
         for (int i = 0; i < country.countriesSize(); i++) {
