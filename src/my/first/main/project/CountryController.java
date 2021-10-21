@@ -47,6 +47,20 @@ public class CountryController implements Comparator<Country> {
         return countries;
     }
 
+    public void exportToFile(String fileName) throws TaxException {
+        try(PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))){
+            for( Country country: listOfCountries) {
+                writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
+                        country.getCountryCode() + DELIMITER_FOR_FILE +
+                        country.getFullTaxInPercent() + DELIMITER_FOR_FILE +
+                        country.getExtraTax());
+            }
+        }catch (FileNotFoundException e){
+                throw new TaxException("File: "+ fileName+"is not found"+e.getMessage());
+        }
+
+    }
+
     public void exportToFileByTax(String fileName) throws TaxException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
@@ -63,7 +77,7 @@ public class CountryController implements Comparator<Country> {
         smaller = getSmallerTax(taxInteger);
 
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))){
-            writer.println("Countries with tax equal or bigger than " + taxInteger +"%:\n");
+            writer.println("Countries with tax bigger or equal than " + taxInteger +"%:\n");
             for( Country country:biggerOrEqual){
                 formatCountryList(getCountriesWithBiggerOrEqualTax(taxInteger));
                 writer.println(country.getNameOfCountry()+DELIMITER_FOR_FILE +
@@ -133,12 +147,14 @@ public class CountryController implements Comparator<Country> {
 
     public static void getCountriesByTax(){
         Scanner scanner = new Scanner(System.in);
+        do {
+
         System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
         List<Country>countryList = new ArrayList<>();
 
         String tax = scanner.nextLine();
         int taxInteger;
-        if (tax.isEmpty()){
+        if (!tax.equals("END")){
             taxInteger = 20;
             countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
         }else {
@@ -146,6 +162,8 @@ public class CountryController implements Comparator<Country> {
             countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
         }
         System.out.println(anotherFormatCountryList(countryList,taxInteger));
+            System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
+        }while(!tax.equals("END"));
     }
 
     public static String anotherFormatCountryList(List<Country> list, int tax) {

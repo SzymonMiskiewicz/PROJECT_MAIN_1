@@ -20,7 +20,7 @@ public class Main {
 
         // region export
         try {
-            country.exportToFileByTax(OUTPUTFILE);
+            country.exportToFile(OUTPUTFILE);
         } catch (TaxException e) {
             System.err.println(e.getMessage());
         }
