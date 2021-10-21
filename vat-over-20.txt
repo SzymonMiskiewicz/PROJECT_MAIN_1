@@ -1,5 +1,3 @@
-Countries with tax equal or bigger than 17%:
-
 Hungary	HU	27.0	false
 Denmark	DK	25.0	false
 Croatia	HR	25.0	false
@@ -28,6 +26,3 @@ Cyprus	CY	19.0	false
 Germany	DE	19.0	false
 Malta	MT	18.0	false
 Luxembourg	LU	17.0	true
-=====================================================================
-Countries with tax equal or bigger than 17%:
-

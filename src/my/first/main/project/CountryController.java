@@ -147,23 +147,26 @@ public class CountryController implements Comparator<Country> {
 
     public static void getCountriesByTax(){
         Scanner scanner = new Scanner(System.in);
-        do {
-
-        System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
         List<Country>countryList = new ArrayList<>();
+        String tax;
+        do {
+            System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
+            tax = scanner.nextLine();
+            if (!tax.equals("END")) {
+                int taxInteger;
+                if (tax.isEmpty()) {
+                    taxInteger = 20;
+                    countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                } else {
+                    taxInteger = Integer.valueOf(tax);
+                    countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                }
+                System.out.println(anotherFormatCountryList(countryList, taxInteger));
+            }System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
 
-        String tax = scanner.nextLine();
-        int taxInteger;
-        if (!tax.equals("END")){
-            taxInteger = 20;
-            countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
-        }else {
-            taxInteger = Integer.valueOf(tax);
-            countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
-        }
-        System.out.println(anotherFormatCountryList(countryList,taxInteger));
-            System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
-        }while(!tax.equals("END"));
+            }
+            while (!tax.equals("END")) ;
+
     }
 
     public static String anotherFormatCountryList(List<Country> list, int tax) {
