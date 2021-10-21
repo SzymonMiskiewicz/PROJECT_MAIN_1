@@ -25,7 +25,7 @@ public class CountryController implements Comparator<Country> {
     public int compare(Country country1, Country country2) {
         return Double.compare(country1.getFullTaxInPercent(), country2.getFullTaxInPercent());
     }
-    
+
     public static CountryController importFromFile(String fileName) throws TaxException {
         CountryController countries = new CountryController();
         Comparator<Country> compareByTax = (o1, o2) -> Double.compare(o1.getFullTaxInPercent(), o2.getFullTaxInPercent());
@@ -50,8 +50,8 @@ public class CountryController implements Comparator<Country> {
     public void exportToFileByTax(String fileName) throws TaxException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
-        List<Country> biggerOrEqual = new ArrayList<>();
-        List<Country> smaller = new ArrayList<>();
+        List<Country> biggerOrEqual;
+        List<Country> smaller;
         String tax = scanner.nextLine();
         int taxInteger;
         if (tax.isEmpty()){
@@ -73,7 +73,7 @@ public class CountryController implements Comparator<Country> {
             }
             writer.print(Main.GAP);
 
-            writer.println("Countries with tax equal or bigger than " + taxInteger +"%:\n");
+            writer.println("Countries with tax smaller than " + taxInteger +"%:\n");
             for( Country country:smaller) {
                 formatCountryList(getSmallerTax(taxInteger));
                 writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
@@ -185,7 +185,6 @@ public class CountryController implements Comparator<Country> {
                 });
         return builder.toString();
     }
-
 
 }
 
