@@ -10,7 +10,7 @@ public class Country  {
 
 
         public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxPercentStr,
-                   String decreaseTaxPercentStr, String extraTaxStr) {
+                   String decreaseTaxPercentStr,String extraTaxStr) {
         this.nameOfCountry = nameOfCountryStr;
         this.countryCode = countryCodesStr;
         this.fullTaxInPercent = Double.parseDouble(fullTaxPercentStr);
@@ -65,16 +65,9 @@ public class Country  {
         this.extraTax = extraTax;
     }
 
-    public String getDescription() {
-        String info = ("Name of Country: " + nameOfCountry
-                + " (" +countryCode+") "+ "Tax: "+fullTaxInPercent
-                +" % "+" Extra Tax: "+extraTax);
-        return info;
-    }
-
     public String toString(){
-        String info = ("Name of Country: " + nameOfCountry + " (" +countryCode+") "
-                + "Tax: "+fullTaxInPercent)+" % "+"Extra Tax: " +extraTax ;
+        String info = (nameOfCountry + " (" +countryCode+") "
+                +fullTaxInPercent)+" % "+extraTax ;
         return info;
     }
 

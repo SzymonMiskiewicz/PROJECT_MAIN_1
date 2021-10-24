@@ -5,6 +5,7 @@ public class Main {
     public static final String INPUTFILE = "vat-eu.csv";
     public static final String OUTPUTFILE = "vat-over-20.txt";
     public static final String GAP = "=====================================================================\n";
+    public static final String OUTPUTFILE2 = "vat-over-20.txt";
 
     public static void main(String[] args) {
 
@@ -28,7 +29,7 @@ public class Main {
 
         //1.Vypiš seznam všech států
         for (int i = 0; i < country.countriesSize(); i++) {
-            System.out.println(country.getCountry(i).getDescription());
+            System.out.println(country.getCountry(i));
 
         }
         // end region
@@ -51,6 +52,12 @@ public class Main {
          *  podle které se má filtrovat.
          *  Vypíší se tedy státy se základní sazbou vyšší než ta, kterou uživatel zadal.*/
         CountryController.getCountriesByTax();
+
+        try {
+            country.exportToFileByTax(OUTPUTFILE2);
+        } catch (TaxException e) {
+            e.printStackTrace();
+        }
 
 
     }

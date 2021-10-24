@@ -22,8 +22,8 @@ public class CountryController implements Comparator<Country> {
     }
 
     @Override
-    public int compare(Country country1, Country country2) {
-        return Double.compare(country1.getFullTaxInPercent(), country2.getFullTaxInPercent());
+    public int compare(Country c1, Country c2) {
+        return Double.compare(c1.getFullTaxInPercent(), c2.getFullTaxInPercent());
     }
 
     public static CountryController importFromFile(String fileName) throws TaxException {
@@ -36,7 +36,7 @@ public class CountryController implements Comparator<Country> {
 
                 if (items.length!=5) throw new TaxException(
                         "The number of items does not correct on: "+inputLine+(items.length+"items"));
-                Country country = new Country(items[1],items[0],items[2],items[3],items[4]);
+                Country country = new Country(items[1],items[0],items[2],items[3], items[4]);
                 countries.addCountry(country);
                 Collections.sort(listOfCountries, compareByTax.reversed() );
             }
