@@ -145,29 +145,35 @@ public class CountryController implements Comparator<Country> {
         return smaller;
     }
 
-    public static void getCountriesByTax(){
+    public static void getCountriesByTax() {
         Scanner scanner = new Scanner(System.in);
-        List<Country>countryList = new ArrayList<>();
+        List<Country> countryList = new ArrayList<>();
         String tax;
         do {
             System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
             tax = scanner.nextLine();
             if (!tax.equals("END")) {
-                int taxInteger;
-                if (tax.isEmpty()) {
-                    taxInteger = 20;
-                    countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
-                } else {
-                    taxInteger = Integer.valueOf(tax);
-                    countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                try {
+                    int taxInteger;
+                    if (tax.isEmpty()) {
+                        taxInteger = 20;
+                        countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                    } else {
+                        taxInteger = Integer.valueOf(tax);
+                        countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                    }
+            }catch(NumberFormatException e){
                 }
+                int taxInteger = 0;
                 System.out.println(anotherFormatCountryList(countryList, taxInteger));
-            }System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
-
             }
-            while (!tax.equals("END")) ;
+
+        }
+        while (!tax.equals("END"));
+                System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
 
     }
+
 
     public static String anotherFormatCountryList(List<Country> list, int tax) {
         StringBuilder builder = new StringBuilder(
@@ -196,12 +202,11 @@ public class CountryController implements Comparator<Country> {
 
     public static String differentFormatCountryList(List<Country> list) {
         StringBuilder builder = new StringBuilder(
-                "List of countries with lower than 20 % tax and extra tax: ("
-                        + list.size() + " items):"
+                "Tax lower than 20 % or does not use extra tax:"
                         + System.lineSeparator());
         list.stream().forEach(
                 country -> {
-                    builder.append(" * " + country);
+                    builder.append(country.getCountryCode());
                     builder.append(System.lineSeparator());
                 });
         return builder.toString();
