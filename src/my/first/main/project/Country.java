@@ -44,8 +44,6 @@ public class Country  {
     }
 
     public void setFullTaxInPercent(int fullTaxInPercent) throws TaxException {
-
-            if (fullTaxInPercent==0) {throw new TaxException("You wrote wrong value of tax" + fullTaxInPercent);}
         this.fullTaxInPercent = fullTaxInPercent;
     }
 
@@ -67,7 +65,7 @@ public class Country  {
 
     public String toString(){
         String info = (nameOfCountry + " (" +countryCode+") "
-                +fullTaxInPercent)+" % "+extraTax ;
+                +fullTaxInPercent)+" % " ;// deleted extra tax
         return info;
     }
 

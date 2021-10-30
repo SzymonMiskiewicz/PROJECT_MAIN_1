@@ -4,8 +4,8 @@ public class Main {
 
     public static final String INPUTFILE = "vat-eu.csv";
     public static final String OUTPUTFILE = "vat-over-20.txt";
-    public static final String GAP = "=====================================================================\n";
-    public static final String OUTPUTFILE2 = "vat-over-20.txt";
+    public static final String GAP = "\n=====================================================================\n";
+
 
     public static void main(String[] args) {
 
@@ -51,10 +51,14 @@ public class Main {
         /** Doplň možnost, aby uživatel z klávesnice zadal výši sazby DPH/VAT,
          *  podle které se má filtrovat.
          *  Vypíší se tedy státy se základní sazbou vyšší než ta, kterou uživatel zadal.*/
-        CountryController.getCountriesByTax();
+        try {
+            CountryController.getCountriesByTax();
+        } catch (TaxException e) {
+            e.printStackTrace();
+        }
 
         try {
-            country.exportToFileByTax(OUTPUTFILE2);
+            country.exportToFileByTax(OUTPUTFILE);
         } catch (TaxException e) {
             e.printStackTrace();
         }

@@ -63,7 +63,7 @@ public class CountryController implements Comparator<Country> {
 
     public void exportToFileByTax(String fileName) throws TaxException{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
+        System.out.println("To Export a File write your value of tax (in %), or press ENTER to use default value 20%");
         List<Country> biggerOrEqual;
         List<Country> smaller;
         String tax = scanner.nextLine();
@@ -145,7 +145,7 @@ public class CountryController implements Comparator<Country> {
         return smaller;
     }
 
-    public static void getCountriesByTax() {
+    public static void getCountriesByTax() throws TaxException {
         Scanner scanner = new Scanner(System.in);
         List<Country> countryList = new ArrayList<>();
         String tax;
@@ -154,23 +154,31 @@ public class CountryController implements Comparator<Country> {
             tax = scanner.nextLine();
             if (!tax.equals("END")) {
                 try {
-                    int taxInteger;
+                    int taxInteger = 0;
                     if (tax.isEmpty()) {
                         taxInteger = 20;
                         countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
-                    } else {
+                    }  else{
                         taxInteger = Integer.valueOf(tax);
+                        if (taxInteger<17){
+                            System.err.println("Value too low. Minimum is 17 !");
+                        }else if (taxInteger>27){
+                            System.err.println("Value too high. Maximum is 27 !");
+                        }else{
                         countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+                        System.out.println(anotherFormatCountryList(countryList,taxInteger));
+                        }
                     }
-            }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {throw new TaxException(
+                                "Incorrect value. Please enter correct value (natural number or \"END\").");
+                    }
                 }
+
                 int taxInteger = 0;
                 System.out.println(anotherFormatCountryList(countryList, taxInteger));
-            }
 
         }
         while (!tax.equals("END"));
-                System.out.println("Incorrect value. Please enter correct value (natural number or \"END\").");
 
     }
 
@@ -202,12 +210,11 @@ public class CountryController implements Comparator<Country> {
 
     public static String differentFormatCountryList(List<Country> list) {
         StringBuilder builder = new StringBuilder(
-                "Tax lower than 20 % or does not use extra tax:"
-                        + System.lineSeparator());
+                "Tax lower than 20 % or does not use extra tax:");
         list.stream().forEach(
                 country -> {
                     builder.append(country.getCountryCode());
-                    builder.append(System.lineSeparator());
+                    builder.append(",");
                 });
         return builder.toString();
     }
