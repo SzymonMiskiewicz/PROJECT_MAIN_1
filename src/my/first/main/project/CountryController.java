@@ -38,7 +38,7 @@ public class CountryController implements Comparator<Country> {
                         "The number of items does not correct on: "+inputLine+(items.length+"items"));
                 Country country = new Country(items[1],items[0],items[2],items[3], items[4]);
                 countries.addCountry(country);
-                Collections.sort(listOfCountries, compareByTax.reversed() );
+                listOfCountries.sort(compareByTax.reversed());
             }
         }
         catch (FileNotFoundException ex) {
@@ -71,7 +71,7 @@ public class CountryController implements Comparator<Country> {
         if (tax.isEmpty()){
             taxInteger = 20;
         } else {
-            taxInteger = Integer.valueOf(tax);
+            taxInteger = Integer.parseInt(tax);
         }
         biggerOrEqual = getCountriesWithBiggerOrEqualTax(taxInteger);
         smaller = getSmallerTax(taxInteger);
@@ -107,7 +107,7 @@ public class CountryController implements Comparator<Country> {
         for (Country country:listOfCountries) {
             if (country.getFullTaxInPercent()>20
                             &&
-                    country.getExtraTax()==false) {
+                    !country.getExtraTax()) {
                 bigAndNoSpecial.add(country);
             }
         }
@@ -119,7 +119,7 @@ public class CountryController implements Comparator<Country> {
         for (Country country:listOfCountries) {
             if (country.getFullTaxInPercent()<=20
                     &&
-                    country.getExtraTax()!=false) {
+                    country.getExtraTax()) {
                 lowAndSpecial.add(country);
             }
         }
@@ -154,12 +154,12 @@ public class CountryController implements Comparator<Country> {
             tax = scanner.nextLine();
             if (!tax.equals("END")) {
                 try {
-                    int taxInteger = 0;
+                    int taxInteger;
                     if (tax.isEmpty()) {
                         taxInteger = 20;
                         countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
                     }  else{
-                        taxInteger = Integer.valueOf(tax);
+                        taxInteger = Integer.parseInt(tax);
                         if (taxInteger<17){
                             System.err.println("Value too low. Minimum is 17 !");
                         }else if (taxInteger>27){
@@ -185,13 +185,11 @@ public class CountryController implements Comparator<Country> {
 
     public static String anotherFormatCountryList(List<Country> list, int tax) {
         StringBuilder builder = new StringBuilder(
-                "List of countries with higher or equal tax "
-                        + tax +" % and extra tax: ("
-                        + list.size() + " items):"
-                        + System.lineSeparator());
-        list.stream().forEach(
+
+                         System.lineSeparator());
+        list.forEach(
                 country -> {
-                    builder.append(" * " + country);
+                    builder.append(" * ").append(country);
                     builder.append(System.lineSeparator());
                 });
         return builder.toString();
@@ -202,7 +200,7 @@ public class CountryController implements Comparator<Country> {
                 "List of countries with higher tax than 20 % and no extra tax: (" + list.size() + " items):" + System.lineSeparator());
         list.stream().forEach(
                 country -> {
-                    builder.append(" * " + country);
+                    builder.append(" * ").append(country);
                     builder.append(System.lineSeparator());
                 });
         return builder.toString();
