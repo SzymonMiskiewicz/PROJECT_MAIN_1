@@ -1,28 +1,28 @@
-Hungary	HU	27.0	false
-Denmark	DK	25.0	false
-Croatia	HR	25.0	false
-Sweden	SE	25.0	false
-Greece	GR	24.0	false
-Finland	FI	24.0	false
-Ireland	IE	23.0	true
-Poland	PL	23.0	false
-Portugal	PT	23.0	true
-Italy	IT	22.0	false
-Slovenia	SI	22.0	false
-Belgium	BE	21.0	true
-CzechRepublic	CZ	21.0	false
-Spain	ES	21.0	false
-Latvia	LV	21.0	false
-Lithuania	LT	21.0	false
-Netherlands	NL	21.0	false
-Austria	AT	20.0	true
-Bulgaria	BG	20.0	false
-Estonia	EE	20.0	false
-France	FR	20.0	false
-Romania	RO	20.0	false
-Slovakia	SK	20.0	false
-United Kingdom	GB	20.0	false
-Cyprus	CY	19.0	false
-Germany	DE	19.0	false
-Malta	MT	18.0	false
-Luxembourg	LU	17.0	true
+Hungary	HU	27.0
+Denmark	DK	25.0
+Croatia	HR	25.0
+Sweden	SE	25.0
+Greece	GR	24.0
+Finland	FI	24.0
+Ireland	IE	23.0
+Poland	PL	23.0
+Portugal	PT	23.0
+Italy	IT	22.0
+Slovenia	SI	22.0
+Belgium	BE	21.0
+CzechRepublic	CZ	21.0
+Spain	ES	21.0
+Latvia	LV	21.0
+Lithuania	LT	21.0
+Netherlands	NL	21.0
+Austria	AT	20.0
+Bulgaria	BG	20.0
+Estonia	EE	20.0
+France	FR	20.0
+Romania	RO	20.0
+Slovakia	SK	20.0
+United Kingdom	GB	20.0
+Cyprus	CY	19.0
+Germany	DE	19.0
+Malta	MT	18.0
+Luxembourg	LU	17.0

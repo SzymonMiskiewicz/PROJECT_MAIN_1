@@ -5,7 +5,7 @@ import java.util.*;
 
 public class CountryController implements Comparator<Country> {
 
-    public static final String SYMBOLS = ", ,., ,:, ;, -, _, +, =, {,},[,], ...";
+
     private static List<Country> listOfCountries = new ArrayList<>();
 
     private final String DELIMITER_FOR_FILE = "\t";
@@ -53,8 +53,7 @@ public class CountryController implements Comparator<Country> {
             for( Country country: listOfCountries) {
                 writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                         country.getCountryCode() + DELIMITER_FOR_FILE +
-                        country.getFullTaxInPercent() + DELIMITER_FOR_FILE +
-                        country.getExtraTax());
+                        country.getFullTaxInPercent());
             }
         }catch (FileNotFoundException e){
                 throw new TaxException("File: "+ fileName+"is not found"+e.getMessage());
@@ -103,10 +102,11 @@ public class CountryController implements Comparator<Country> {
                             country.getExtraTax());
                 }
 
-                writer.flush();
+//                writer.flush();
             } catch (FileNotFoundException exa) {
                 throw new TaxException("File: " + fileName + "is not found" + exa.getMessage());
             }
+
         }
         }while (!tax.equals("END"));
 
