@@ -4,6 +4,7 @@ public class Main {
 
     public static final String INPUTFILE = "vat-eu.csv";
     public static final String OUTPUTFILE = "vat-over-20.txt";
+    public static final String NEW_OUTPUT_FILE_WITH_CUSTOM_TAX = "C:\\Users\\szymo\\frs\\";
     public static final String GAP = "\n=====================================================================\n";
 
 
@@ -44,21 +45,18 @@ public class Main {
         System.out.println(GAP);
 
     /**4.Pod výpis doplň řádek s rovnítky pro oddělení a poté seznam zkratek států, které ve výpisu nefigurují.*/
-        System.out.print(CountryController.differentFormatCountryList(country.getCountriesWithLowerAndSpecialTax()));
+        System.out.print (CountryController.differentFormatCountryList(country.getCountriesWithLowerAndSpecialTax()));
+
 
         System.out.println(GAP);
 
         /** Doplň možnost, aby uživatel z klávesnice zadal výši sazby DPH/VAT,
          *  podle které se má filtrovat.
          *  Vypíší se tedy státy se základní sazbou vyšší než ta, kterou uživatel zadal.*/
-        try {
-            CountryController.getCountriesByTax();
-        } catch (TaxException e) {
-            e.printStackTrace();
-        }
+        CountryController.getCountriesByTax();
 
         try {
-            country.exportToFileByTax(OUTPUTFILE);
+            country.exportToFileByTax(NEW_OUTPUT_FILE_WITH_CUSTOM_TAX);
         } catch (TaxException e) {
             e.printStackTrace();
         }
