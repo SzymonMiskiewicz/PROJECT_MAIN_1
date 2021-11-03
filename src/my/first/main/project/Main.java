@@ -4,7 +4,7 @@ public class Main {
 
     public static final String INPUTFILE = "vat-eu.csv";
     public static final String OUTPUTFILE = "vat-over-20.txt";
-    public static final String NEW_OUTPUT_FILE_WITH_CUSTOM_TAX = "Vat-over-";
+    public static final String NEW_OUTPUT_FILE_WITH_CUSTOM_TAX = "Vat-Over-";
     public static final String GAP = "\n=====================================================================\n";
 
 

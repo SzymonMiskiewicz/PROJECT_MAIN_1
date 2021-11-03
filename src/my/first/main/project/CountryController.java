@@ -37,7 +37,7 @@ public class CountryController implements Comparator<Country> {
 
                 if (items.length!=5) throw new TaxException(
                         "The number of items does not correct on: "+inputLine+(items.length+"items"));
-                Country country = new Country(items[1],items[0],items[2],items[3], items[4]);
+                Country country = new Country(items[1],items[0],items[2],items[3],items[4]);
                 countries.addCountry(country);
                 listOfCountries.sort(compareByTax.reversed());
             }
@@ -82,14 +82,14 @@ public class CountryController implements Comparator<Country> {
             smaller = getSmallerTax(taxInteger);
 
             String newFileName = fileName + tax + ".txt";
-            try (PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))) {
+
+            try (PrintWriter writer = new PrintWriter(new FileOutputStream(newFileName))) {
                 writer.println("Countries with tax bigger or equal than " + taxInteger + "%:\n");
                 for (Country country : biggerOrEqual) {
                     formatCountryList(getCountriesWithBiggerOrEqualTax(taxInteger));
                     writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                             country.getCountryCode() + DELIMITER_FOR_FILE +
-                            country.getFullTaxInPercent() + DELIMITER_FOR_FILE +
-                            country.getExtraTax());
+                            country.getFullTaxInPercent() + DELIMITER_FOR_FILE );
                 }
                 writer.print(Main.GAP);
 
@@ -98,11 +98,11 @@ public class CountryController implements Comparator<Country> {
                     formatCountryList(getSmallerTax(taxInteger));
                     writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                             country.getCountryCode() + DELIMITER_FOR_FILE +
-                            country.getFullTaxInPercent() + DELIMITER_FOR_FILE +
-                            country.getExtraTax());
+                            country.getFullTaxInPercent() );
                 }
 
-//                writer.flush();
+                writer.flush();
+
             } catch (FileNotFoundException exa) {
                 throw new TaxException("File: " + fileName + "is not found" + exa.getMessage());
             }

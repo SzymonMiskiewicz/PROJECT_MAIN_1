@@ -22,6 +22,7 @@ public class Country  {
             this.fullTaxInPercent = fullTaxInPercent;
     }
 
+
     public String getNameOfCountry() {
         return nameOfCountry;
     }
