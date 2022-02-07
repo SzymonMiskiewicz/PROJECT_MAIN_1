@@ -9,11 +9,11 @@ public class Country  {
     private boolean extraTax;
 
 
-        public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxPercentStr,
+        public Country(String nameOfCountryStr, String countryCodesStr, String fullTaxInPercentStr,
                    String decreaseTaxPercentStr,String extraTaxStr) {
         this.nameOfCountry = nameOfCountryStr;
         this.countryCode = countryCodesStr;
-        this.fullTaxInPercent = Double.parseDouble(fullTaxPercentStr);
+        this.fullTaxInPercent = Double.parseDouble(fullTaxInPercentStr);
         this.decreaseTaxInPercent = Double.parseDouble(decreaseTaxPercentStr);
         this.extraTax = Boolean.parseBoolean(extraTaxStr);
     }
@@ -66,7 +66,7 @@ public class Country  {
 
     public String toString(){
         String info = (nameOfCountry + " (" +countryCode+") "
-                +fullTaxInPercent)+" % " ;// deleted extra tax
+                +fullTaxInPercent)+" % " ;
         return info;
     }
 

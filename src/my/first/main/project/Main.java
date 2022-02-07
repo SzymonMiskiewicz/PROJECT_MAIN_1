@@ -10,9 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // region import
         CountryController country = new CountryController();
 
+        // region import
         try {
             country = CountryController.importFromFile(INPUTFILE);
         } catch (TaxException e) {
@@ -54,6 +54,7 @@ public class Main {
          *  podle které se má filtrovat.
          *  Vypíší se tedy státy se základní sazbou vyšší než ta, kterou uživatel zadal.*/
         CountryController.getCountriesByTax();
+
 
         try {
             country.exportToFileByTax(NEW_OUTPUT_FILE_WITH_CUSTOM_TAX);

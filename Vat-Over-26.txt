@@ -1,0 +1,34 @@
+Countries with tax bigger or equal than 26%:
+
+Hungary	HU	27.0	
+
+=====================================================================
+Countries with tax smaller than 26%:
+
+Denmark	DK	25.0
+Croatia	HR	25.0
+Sweden	SE	25.0
+Greece	GR	24.0
+Finland	FI	24.0
+Ireland	IE	23.0
+Poland	PL	23.0
+Portugal	PT	23.0
+Italy	IT	22.0
+Slovenia	SI	22.0
+Belgium	BE	21.0
+CzechRepublic	CZ	21.0
+Spain	ES	21.0
+Latvia	LV	21.0
+Lithuania	LT	21.0
+Netherlands	NL	21.0
+Austria	AT	20.0
+Bulgaria	BG	20.0
+Estonia	EE	20.0
+France	FR	20.0
+Romania	RO	20.0
+Slovakia	SK	20.0
+United Kingdom	GB	20.0
+Cyprus	CY	19.0
+Germany	DE	19.0
+Malta	MT	18.0
+Luxembourg	LU	17.0

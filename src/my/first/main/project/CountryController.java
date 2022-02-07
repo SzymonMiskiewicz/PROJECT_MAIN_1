@@ -6,7 +6,7 @@ import java.util.*;
 public class CountryController implements Comparator<Country> {
 
 
-    private static List<Country> listOfCountries = new ArrayList<>();
+    private static final List<Country> listOfCountries = new ArrayList<>();
 
     private final String DELIMITER_FOR_FILE = "\t";
 
@@ -28,10 +28,14 @@ public class CountryController implements Comparator<Country> {
     }
 
     public static CountryController importFromFile(String fileName) throws TaxException {
+
         CountryController countries = new CountryController();
+
         Comparator<Country> compareByTax = (o1, o2) -> Double.compare(o1.getFullTaxInPercent(), o2.getFullTaxInPercent());
         try (Scanner scanner = new Scanner(new FileInputStream(fileName))) {
+
             while (scanner.hasNextLine()){
+
                 String inputLine = scanner.nextLine();
                 String[] items = inputLine.split(countries.DELIMITER_FOR_FILE);
 
@@ -41,20 +45,24 @@ public class CountryController implements Comparator<Country> {
                 countries.addCountry(country);
                 listOfCountries.sort(compareByTax.reversed());
             }
-        }
-        catch (FileNotFoundException ex) {
+
+        } catch (FileNotFoundException ex) {
             throw new TaxException("File: " + fileName + "Not Found" + ex.getMessage());
         }
         return countries;
     }
 
     public void exportToFile(String fileName) throws TaxException {
+
         try(PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))){
+
             for( Country country: listOfCountries) {
+
                 writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                         country.getCountryCode() + DELIMITER_FOR_FILE +
                         country.getFullTaxInPercent());
             }
+
         }catch (FileNotFoundException e){
                 throw new TaxException("File: "+ fileName+"is not found"+e.getMessage());
         }
@@ -62,17 +70,24 @@ public class CountryController implements Comparator<Country> {
     }
 
     public void exportToFileByTax(String fileName) throws TaxException{
+
         Scanner scanner ;
         List<Country> biggerOrEqual;
         List<Country> smaller;
         int taxInteger;
         String tax;
+
         do{
-        System.out.println("To Export a File write your value of tax (in %), or press ENTER to use default value 20%");
-        scanner = new Scanner(System.in);
-        tax = scanner.nextLine();
+            System.out.println("To Export a File write your value of tax (in %), or press ENTER to use default value 20%");
+
+            scanner = new Scanner(System.in);
+
+            tax = scanner.nextLine();
+
         if (!tax.equals("END")) {
+
             if (tax.isEmpty()) {
+
                 taxInteger = 20;
 
             } else {
@@ -82,11 +97,14 @@ public class CountryController implements Comparator<Country> {
             smaller = getSmallerTax(taxInteger);
 
             String newFileName = fileName + tax + ".txt";
-
             try (PrintWriter writer = new PrintWriter(new FileOutputStream(newFileName))) {
+
                 writer.println("Countries with tax bigger or equal than " + taxInteger + "%:\n");
+
                 for (Country country : biggerOrEqual) {
+
                     formatCountryList(getCountriesWithBiggerOrEqualTax(taxInteger));
+
                     writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                             country.getCountryCode() + DELIMITER_FOR_FILE +
                             country.getFullTaxInPercent() + DELIMITER_FOR_FILE );
@@ -94,8 +112,11 @@ public class CountryController implements Comparator<Country> {
                 writer.print(Main.GAP);
 
                 writer.println("Countries with tax smaller than " + taxInteger + "%:\n");
+
                 for (Country country : smaller) {
+
                     formatCountryList(getSmallerTax(taxInteger));
+
                     writer.println(country.getNameOfCountry() + DELIMITER_FOR_FILE +
                             country.getCountryCode() + DELIMITER_FOR_FILE +
                             country.getFullTaxInPercent() );
@@ -113,11 +134,15 @@ public class CountryController implements Comparator<Country> {
     }
 
     public List<Country> getCountriesWithBiggerAndNoSpecialTax(){
+
         List<Country> bigAndNoSpecial = new ArrayList<>();
+
         for (Country country:listOfCountries) {
+
             if (country.getFullTaxInPercent()>=20
                             &&
-            !country.getExtraTax()) {
+                    !country.getExtraTax()) {
+
                 bigAndNoSpecial.add(country);
             }
         }
@@ -125,20 +150,28 @@ public class CountryController implements Comparator<Country> {
     }
 
     public List<Country>getCountriesWithLowerAndSpecialTax(){
+
         List<Country> lowAndSpecial = new ArrayList<>();
+
         for (Country country:listOfCountries) {
+
             if (country.getFullTaxInPercent()<20
                     &&
                     country.getExtraTax()== false) {
+
                 lowAndSpecial.add(country);
             }
         }
         return lowAndSpecial;
     }
     public static List<Country> getCountriesWithBiggerOrEqualTax(int tax) {
+
         List<Country>bigOrEqual = new ArrayList<>();
+
         for (Country country:listOfCountries) {
+
             if (country.getFullTaxInPercent()>=tax){
+
                 bigOrEqual.add(country);
             }
 
@@ -146,9 +179,13 @@ public class CountryController implements Comparator<Country> {
         return bigOrEqual;
     }
     public static List<Country>getSmallerTax(int tax){
+
         List<Country>smaller = new ArrayList<>();
+
         for (Country country:listOfCountries){
+
             if (country.getFullTaxInPercent()<tax){
+
                 smaller.add(country);
             }
         }
@@ -157,25 +194,40 @@ public class CountryController implements Comparator<Country> {
 
 
     public static void getCountriesByTax() {
+
         Scanner scanner = new Scanner(System.in);
-        List<Country> countryList = new ArrayList<>();
+
+        List<Country> countryList = new ArrayList<>(listOfCountries);
+
         String tax;
+
         do {
             System.out.println("Write your value of tax (in %), or press ENTER to use default value 20%");
+
             tax = scanner.nextLine();
+
             if (!tax.equals("END")) {
+
                 try {
                     int taxInteger;
+
                     if (tax.isEmpty()){
+
                         taxInteger = 20;
+
                         countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
+
                     }  else{
+
                         taxInteger = Integer.parseInt(tax);
                         if (taxInteger<17){
+
                             System.err.println("Value too low. Minimum is 17 !");
-                        }else if (taxInteger>27){
+                        } else if (taxInteger>27){
+
                             System.err.println("Value too high. Maximum is 27 !");
                         }else{
+
                         countryList = getCountriesWithBiggerOrEqualTax(taxInteger);
 //                        System.out.println(anotherFormatCountryList(countryList, taxInteger));
                         }
@@ -196,33 +248,45 @@ public class CountryController implements Comparator<Country> {
 
 
     public static String anotherFormatCountryList(List<Country> list, int tax) {
+
         StringBuilder builder = new StringBuilder(
                 "Last filtred values :"
                 +System.lineSeparator());
-        list.forEach(
-                country -> {
+
+        list.forEach(country -> {
+
                     builder.append(" * ").append(country);
                     builder.append(System.lineSeparator());
+
                 });
+
         return builder.toString();
     }
 
     public static String formatCountryList(List<Country> list) {
+
         StringBuilder builder = new StringBuilder(
-                "List of countries with higher tax than 20 % and no extra tax: (" + list.size() + " items):" + System.lineSeparator());
+                "List of countries with higher tax than 20 % and no extra tax: ("
+
+                        + list.size() + " items):" + System.lineSeparator());
         list.forEach(
                 country -> {
+
                     builder.append(" * ").append(country);
                     builder.append(System.lineSeparator());
                 });
+
         return builder.toString();
     }
 
     public static String differentFormatCountryList(List<Country> list) {
+
         StringBuilder builder = new StringBuilder(
                 "Tax lower than 20 % or does not use extra tax:");
+
         list.forEach(
                 country -> {
+
                     builder.append(country.getCountryCode());
                     builder.append(", ");
                 });
